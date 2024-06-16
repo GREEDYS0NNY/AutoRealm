@@ -1,0 +1,62 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*Nav tab styles*/
+.login-logout-card .card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+.login-logout-card ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+.login-logout-card li.nav-items {
+    width: 50%;
+}
+
+.login-logout-card a.nav-link {
+    font-size: 16px;
+    color: #495057;
+    text-align: center;
+    padding: 16px;
+}
+
+.login-logout-card .card-body {
+    padding: 10px 20px;
+}
+
+/*Labels style*/
+.form-group label {
+    color: gray;
+}
+
+/*dd tag style*/
+.indent {
+    padding-left: 86px;
+}
+
+/*Description*/
+.text-wrap {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

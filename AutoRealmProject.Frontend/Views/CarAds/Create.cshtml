@@ -1,0 +1,91 @@
+﻿@model AutoRealmProject.Backend.Entities.CarAd
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h4>Create Your car ad</h4>
+        <hr />
+        <form asp-action="Create" enctype="multipart/form-data" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand" class="form-control" asp-items="ViewBag.Brands" id="BrandSelect">
+                    <option value="">Select Brand</option>
+                </select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <select asp-for="Model" class="form-control" id="ModelSelect">
+                    <option value="">Select Model</option>
+                </select>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price ($)</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage" class="control-label">Mileage (km)</label>
+                <input asp-for="Mileage" class="form-control" />
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="CarPhoto" class="control-label">Photo</label>
+                <input type="file" name="photo" class="form-control" />
+                <span asp-validation-for="CarPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success w-100" style="margin-top: 20px;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById("BrandSelect").addEventListener("change", function () {
+            var brand = this.value;
+            var modelSelect = document.getElementById("ModelSelect");
+
+            if (brand) {
+                fetch(`/CarAds/GetModels?brand=${brand}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        modelSelect.innerHTML = '<option value="">Select Model</option>';
+                        data.forEach(model => {
+                            var option = document.createElement("option");
+                            option.value = model;
+                            option.text = model;
+                            modelSelect.appendChild(option);
+                        });
+                    });
+            } else {
+                modelSelect.innerHTML = '<option value="">Select Model</option>';
+            }
+        });
+    </script>
+}

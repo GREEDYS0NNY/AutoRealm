@@ -1,0 +1,61 @@
+﻿@model AutoRealmProject.Backend.Entities.CarAd
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div>
+    <div class="col-md-4 offset-md-4">
+        <h3>Are you sure you want to delete this ad?</h3>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Brand)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Brand)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @HtmlHelpers.FormatPrice(Model.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Mileage)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @HtmlHelpers.FormatMileage(Model.Mileage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="AdId" />
+            <input type="submit" value="Delete" class="btn btn-danger w-100" />
+        </form>
+    </div>
+</div>

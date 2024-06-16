@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AutoRealmProject.Backend.Entities
+
+@inject UserManager<AppUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+
+@model AutoRealmProject.Backend.Entities.CarAd
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <div class="col-md-4 offset-md-4">
+        <h4>Details of this ad</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Brand)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Brand)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @HtmlHelpers.FormatPrice(Model.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Mileage)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @HtmlHelpers.FormatMileage(Model.Mileage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd class="col-sm-10 indent">
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10 indent text-wrap">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CarPhoto)
+            </dt>
+            <dd class="col-sm-12 indent">
+                @if (Model.CarPhoto != null)
+                {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.CarPhoto)" class="img-fluid" />
+                }
+                else
+                {
+                    <p>No photo available</p>
+                }
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayName("Contact email")
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Owner?.Email
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayName("Contact phone")
+            </dt>
+            <dd class="col-sm-8">
+                @(Model.Owner?.PhoneNumber ?? "Not available")
+            </dd>
+        </dl>
+    </div>
+</div>
+

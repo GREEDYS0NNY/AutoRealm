@@ -1,0 +1,90 @@
+﻿@using AutoRealmProject
+@using Microsoft.AspNetCore.Identity
+@using AutoRealmProject.Backend.Entities
+
+@inject UserManager<AppUser> UserManager
+
+@model IEnumerable<AutoRealmProject.Backend.Entities.CarAd>
+
+@{
+    ViewData["Title"] = "Manage Your car ads";
+    var user = await UserManager.GetUserAsync(User);
+    var userId = user?.Id;
+}
+
+<h2>Manage Your car ads</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success">
+        <i class="fa-light fa-plus"></i>
+        Create New
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mileage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (userId == item.OwnerId)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @HtmlHelpers.FormatPrice(item.Price)
+                    </td>
+                    <td>
+                        @HtmlHelpers.FormatMileage(item.Mileage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AdId" class="btn btn-sm btn-primary">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.AdId" class="btn btn-sm btn-info">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.AdId" class="btn btn-sm btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
